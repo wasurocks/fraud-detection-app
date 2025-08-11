@@ -1,0 +1,115 @@
+services:
+    # Jupyter notebook service for interactive development
+    fraud-eda:
+        build: .
+        container_name: fraud-eda
+        ports:
+            - "8888:8888"
+        volumes:
+            - .:/app
+            - ./models:/app/models
+        environment:
+            - PYTHONPATH=/app/src
+            - JUPYTER_ENABLE_LAB=yes
+        command:
+            [
+                "jupyter",
+                "notebook",
+                "--ip=0.0.0.0",
+                "--port=8888",
+                "--no-browser",
+                "--allow-root",
+                "--NotebookApp.token=",
+                "--NotebookApp.password=",
+                "--NotebookApp.allow_origin='*'",
+                "--NotebookApp.disable_check_xsrf=True"
+            ]
+        shm_size: 2gb
+        mem_limit: 8g
+        networks:
+            - fraud-net
+
+    # Training service for automated model training
+    fraud-training:
+        build: .
+        container_name: fraud-training
+        volumes:
+            - .:/app
+            - ./models:/app/models
+        environment:
+            - PYTHONPATH=/app/src
+        command:
+            [
+                "python",
+                "/app/src/train_model.py",
+                "--data-path",
+                "/app/data/fraud_mock.csv",
+                "--output-dir",
+                "/app/models",
+                "--no-optimize-xgb",
+                "--sample-size",
+                "500000"
+            ]
+        depends_on:
+            - fraud-eda
+        profiles:
+            - training
+        shm_size: 4gb
+        mem_limit: 12g
+        networks:
+            - fraud-net
+
+    # Evaluation service for model evaluation
+    fraud-evaluation:
+        build: .
+        container_name: fraud-evaluation
+        volumes:
+            - .:/app
+            - ./models:/app/models
+        environment:
+            - PYTHONPATH=/app/src
+        command:
+            [
+                "python",
+                "/app/src/evaluate_model.py",
+                "--model-dir",
+                "/app/models",
+                "--data-path",
+                "/app/data/fraud_mock.csv",
+                "--mode",
+                "evaluate",
+                "--save-plots",
+            ]
+        depends_on:
+            - fraud-training
+        profiles:
+            - evaluation
+        networks:
+            - fraud-net
+
+    # API service for model serving
+    fraud-api:
+        build: .
+        container_name: fraud-api
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/app
+            - ./models:/app/models
+        environment:
+            - PYTHONPATH=/app/src
+        command: ["python", "/app/src/api.py"]
+        depends_on:
+            - fraud-eda
+        profiles:
+            - api
+        networks:
+            - fraud-net
+
+networks:
+    fraud-net:
+        driver: bridge
+
+volumes:
+    fraud-models:
+        driver: local

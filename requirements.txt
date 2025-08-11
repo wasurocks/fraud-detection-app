@@ -1,0 +1,32 @@
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+scikit-learn
+jupyter
+
+# Machine Learning Libraries
+xgboost
+imbalanced-learn
+lightgbm
+catboost
+
+# Model Evaluation & Metrics
+mlflow
+optuna
+
+# Utilities
+joblib
+pickle-mixin
+tqdm
+
+# Development
+pytest
+black
+flake8
+
+# API Framework
+fastapi
+uvicorn[standard]
+pydantic
