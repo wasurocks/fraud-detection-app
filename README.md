@@ -10,6 +10,19 @@ A complete machine learning system for real-time fraud detection with REST API, 
 - **💾 Full Persistence** - SQLite database for all predictions
 - **📊 Production Ready** - Dockerized with comprehensive monitoring
 
+## 🏗️ System Architecture
+
+![Architecture Diagram](architecture.png)
+
+The fraud detection system follows a modern streaming architecture with real-time processing capabilities:
+
+- **Data Ingestion**: Financial services feed transaction data through Kafka clusters
+- **Stream Processing**: Real-time transaction processing with ML-powered fraud detection
+- **Detection Engine**: Calculates risk scores and makes fraud/legitimate decisions
+- **Alerting System**: Generates notifications and stores results for audit
+- **Storage Layer**: PostgreSQL for persistent data and Redis for caching
+- **API Layer**: REST endpoints for real-time predictions and historical data access
+
 ## 🗂️ Dataset Setup
 
 **⚠️ Important:** The dataset is not included in this repository due to its large size (6,362,620 transactions).
