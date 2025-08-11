@@ -35,7 +35,7 @@ A complete machine learning system for real-time fraud detection with REST API, 
 
 ### 1. 📥 Get the Project
 ```bash
-cd scb-mle-app
+cd fraud-detection-app
 ```
 
 ### 2. 🧪 Interactive Development (Optional)
@@ -179,7 +179,7 @@ curl "http://localhost:8000/model-info"
 ## 🏗️ Project Structure
 
 ```
-scb-mle-app/
+fraud-detection-app/
 ├── 📊 data/
 │   ├── fraud_mock.csv              # 6.3M transaction dataset
 │   └── fraud_predictions.db        # SQLite predictions database
