@@ -1,0 +1,52 @@
+# Dataset files (too large for git)
+data/fraud_mock.csv
+data/*.csv
+
+# Trained models (too large for git)
+models/best_fraud_model.joblib
+models/data_processor.joblib
+models/feature_names.joblib
+models/model_metadata.joblib
+models/*.joblib
+models/*.pkl
+
+# Database files
+data/fraud_predictions.db
+data/*.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Logs
+*.log
+logs/

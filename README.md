@@ -10,9 +10,14 @@ A complete machine learning system for real-time fraud detection with REST API, 
 - **💾 Full Persistence** - SQLite database for all predictions
 - **📊 Production Ready** - Dockerized with comprehensive monitoring
 
-## 🗂️ Dataset
+## 🗂️ Dataset Setup
 
-**6,362,620 transactions** with fraud labels containing:
+**⚠️ Important:** The dataset is not included in this repository due to its large size (6,362,620 transactions).
+
+### Download Dataset
+1. Download the fraud detection dataset from: https://scbpocseasta001stdsbx.z23.web.core.windows.net/
+2. Save the file as `fraud_mock.csv` in the `data/` directory
+3. Ensure the dataset contains the following structure:
 
 | Feature | Type | Description |
 |---------|------|-------------|
@@ -32,10 +37,19 @@ A complete machine learning system for real-time fraud detection with REST API, 
 ### Prerequisites
 - **Docker** & **Docker Compose**
 - **8GB+ RAM** (for model training)
+- **Dataset:** Download fraud_mock.csv from https://scbpocseasta001stdsbx.z23.web.core.windows.net/ and place in `data/` folder
 
-### 1. 📥 Get the Project
+### 1. 📥 Setup the Project
 ```bash
+git clone <your-repo-url>
 cd fraud-detection-app
+
+# Create data directory if it doesn't exist
+mkdir -p data models
+
+# Download the dataset
+# Visit https://scbpocseasta001stdsbx.z23.web.core.windows.net/
+# Download and save as data/fraud_mock.csv
 ```
 
 ### 2. 🧪 Interactive Development (Optional)
@@ -46,7 +60,9 @@ docker-compose up --build -d
 # Open: notebooks/eda_fraud.ipynb or notebooks/model_training.ipynb
 ```
 
-### 3. 🤖 Train Models (Automated)
+### 3. 🤖 Train Models (Required - Models Not Included)
+**⚠️ Important:** Trained models are not included in the repository due to their large size. You must train them first.
+
 Train all models automatically:
 ```bash
 ./scripts/run_training.sh
